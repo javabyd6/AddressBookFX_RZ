@@ -21,7 +21,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView fx:id="personTableView" layoutX="34.0" layoutY="14.0" prefHeight="398.0" prefWidth="194.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView onMouseClicked="#selectedPerson" fx:id="personTableView" layoutX="34.0" layoutY="14.0" prefHeight="398.0" prefWidth="194.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn fx:id="nameCol" prefWidth="123.0" text="Name" />
                             <TableColumn fx:id="lastNameCol" minWidth="0.0" prefWidth="139.0" text="Lastname" />
@@ -109,7 +109,7 @@
                         </GridPane>
                         <ButtonBar layoutY="301.0" prefHeight="98.0" prefWidth="380.0">
                           <buttons>
-                            <Button fx:id="newPersonButton" alignment="CENTER" mnemonicParsing="false" text="New Person" />
+                            <Button fx:id="newPersonButton" onAction="#setNewPersonButton" alignment="CENTER" mnemonicParsing="false" text="New Person" />
                               <Button fx:id="editButton" alignment="CENTER" mnemonicParsing="false" text="Edit" />
                               <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" text="Delete" />
                               <Button fx:id="saveButton" alignment="CENTER" mnemonicParsing="false" text="Save" />
