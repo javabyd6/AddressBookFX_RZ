@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>pl.sda.javafx.Main</mainClass>
+                            <mainClass>pl.sda.addressbook.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
