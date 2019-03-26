@@ -110,9 +110,9 @@
                         <ButtonBar layoutY="301.0" prefHeight="98.0" prefWidth="380.0">
                           <buttons>
                             <Button fx:id="newPersonButton" onAction="#setNewPersonButton" alignment="CENTER" mnemonicParsing="false" text="New Person" />
-                              <Button fx:id="editButton" alignment="CENTER" mnemonicParsing="false" text="Edit" />
-                              <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" text="Delete" />
-                              <Button fx:id="saveButton" alignment="CENTER" mnemonicParsing="false" text="Save" />
+                              <Button fx:id="editButton" onAction="#setEditButton" alignment="CENTER" mnemonicParsing="false" text="Edit" />
+                              <Button fx:id="deleteButton" onAction="#setDeleteButton" alignment="CENTER" mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="saveButton" onMouseClicked="#setSaveButton" alignment="CENTER" mnemonicParsing="false" text="Save" />
                           </buttons>
                         </ButtonBar>
                      </children>

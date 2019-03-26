@@ -16,8 +16,10 @@ import javafx.stage.Stage;
 import pl.sda.addressbook.Main;
 import pl.sda.addressbook.model.Person;
 
-import java.io.IOException;
+import javax.xml.crypto.Data;
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -84,8 +86,7 @@ public class RootViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        nameCol.setCellValueFactory(c -> c.getValue().nameProperty());
-//        lastNameCol.setCellValueFactory(c -> c.getValue().lastnameProperty());
+
     }
 
     public void loadPerson() {
@@ -96,17 +97,13 @@ public class RootViewController implements Initializable {
     }
 
     public void selectedPerson(MouseEvent mouseEvent) {
-
         Person person = personTableView.getSelectionModel().getSelectedItem();
-        System.out.println(person);
         nameLabel.setText(person.getName());
         lastnameLabel.setText(person.getLastname());
         addressLabel.setText(person.getAddress());
         postalCodeLabel.setText(person.getPostalCode());
         telephoneLabel.setText(person.getTelephone());
         cityLabel.setText(person.getCity());
-
-
     }
 
     //1. Załadowanie FXML
@@ -130,13 +127,7 @@ public class RootViewController implements Initializable {
         stage.show();
     }
 
-//    private Stage getStage() {
-//    }
-//
-//    private Stage setStage() {
-//    }
-
-    private void setEditButton() throws IOException {
+    public void setEditButton() throws IOException {
         //1. Załadowanie FXML
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/editRoot.fxml"));
@@ -144,14 +135,22 @@ public class RootViewController implements Initializable {
         //2. Parent
         Parent root = loader.getRoot();
         EditRootViewController editRootViewController = loader.getController();
+        editRootViewController.setMain(main);
+        editRootViewController.setSelectedPerson(personTableView.getSelectionModel().getSelectedItem());
+        editRootViewController.initializeForm();
         //3. Nowy obiekt Stage
         Stage stage = new Stage();
         //4. Set Scene na Stage
         stage.setScene(new Scene(root));
         stage.show();
+    }
 
-        ObservableList<Person> personList = main.getPersonList();
-        personTableView.getSelectionModel().getFocusedIndex();
+    public void setDeleteButton() {
+        ObservableList<Person> list = main.getPersonList();
+        list.remove(personTableView.getSelectionModel().getFocusedIndex());
+    }
 
+    public void setSaveButton(MouseEvent mouseEvent) throws IOException {
+        Person.toJSON(main.getJsonFileName(), main.getPersonList());
     }
 }

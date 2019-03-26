@@ -10,15 +10,21 @@ import javafx.stage.Stage;
 import pl.sda.addressbook.controller.RootViewController;
 import pl.sda.addressbook.model.Person;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 /**
  * @author Remigiusz Zudzin
  */
 
 public class Main extends Application {
 
+    private String jsonFileName = "database.json";
     private ObservableList<Person> personList = FXCollections.observableArrayList();
 
     public Main() {
+
         personList.add(new Person("Jan", "Kowalski", "adres",
                 "85-100", "123456789", "Bydgoszcz"));
         personList.add(new Person("Tomasz", "Nowak", "adres2",
@@ -29,6 +35,10 @@ public class Main extends Application {
 
     public ObservableList<Person> getPersonList() {
         return personList;
+    }
+
+    public String getJsonFileName() {
+        return jsonFileName;
     }
 
     public static void main(String[] args) {
@@ -51,7 +61,6 @@ public class Main extends Application {
         //stworzenie obiektu klasy FXMLoader, następnie ustawienie lokalizacji jego roota, a potem załadowanie
         //Następnie pobranie roota i ustawienie na instancji RootViewController tego kontrollera którego tworzymy
         //przez użycie metody getController dla obiektu loader
-
         rootViewController.setMain(this);
         rootViewController.loadPerson();
         primaryStage.setScene(new Scene(root));

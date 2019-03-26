@@ -1,7 +1,19 @@
 package pl.sda.addressbook.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Remigiusz Zudzin
@@ -23,6 +35,43 @@ public class Person {
         this.postalCode = new SimpleStringProperty(postalCode);
         this.telephone = new SimpleStringProperty(telephone);
         this.city = new SimpleStringProperty(city);
+
+    }
+
+    public static void toJSON(String filename, List<Person> people) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            String JsonString = mapper.writeValueAsString(people);
+            Files.write(Paths.get(filename), JsonString.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ObservableList<Person> fromJSON (File file) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        ObservableList<Person> output = FXCollections.observableArrayList();
+        List<Person> list = new ArrayList<>();
+
+        output.addAll(list);
+        return output;
+    }
+
+    public static List<Person> readListFromJSON(File file) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Person> output = new ArrayList<>();
+        Person[] outArray;
+
+        try {
+            outArray = mapper.readValue(file, Person[].class);
+            output = Arrays.asList(outArray);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return output;
 
     }
 

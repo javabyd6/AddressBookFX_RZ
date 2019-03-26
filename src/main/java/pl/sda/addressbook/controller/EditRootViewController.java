@@ -6,9 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import pl.sda.addressbook.Main;
 import pl.sda.addressbook.model.Person;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -41,87 +44,48 @@ public class EditRootViewController implements Initializable {
     @FXML
     private Button cancelButton;
 
-    public TextField getNameLabel() {
-        return nameLabel;
-    }
-
-    public void setNameLabel(TextField nameLabel) {
-        this.nameLabel = nameLabel;
-    }
-
-    public TextField getLastNameLabel() {
-        return lastNameLabel;
-    }
-
-    public void setLastNameLabel(TextField lastNameLabel) {
-        this.lastNameLabel = lastNameLabel;
-    }
-
-    public TextField getAddressLabel() {
-        return addressLabel;
-    }
-
-    public void setAddressLabel(TextField addressLabel) {
-        this.addressLabel = addressLabel;
-    }
-
-    public TextField getCityLabel() {
-        return cityLabel;
-    }
-
-    public void setCityLabel(TextField cityLabel) {
-        this.cityLabel = cityLabel;
-    }
-
-    public TextField getPostalCodeLabel() {
-        return postalCodeLabel;
-    }
-
-    public void setPostalCodeLabel(TextField postalCodeLabel) {
-        this.postalCodeLabel = postalCodeLabel;
-    }
-
-    public TextField getTelephoneLabel() {
-        return telephoneLabel;
-    }
-
-    public void setTelephoneLabel(TextField telephoneLabel) {
-        this.telephoneLabel = telephoneLabel;
-    }
-
-    public Button getSaveButton() {
-        return saveButton;
-    }
-
-    public void setSaveButton(Button saveButton) {
-        this.saveButton = saveButton;
-    }
-
-    public Button getCancelButton() {
-        return cancelButton;
-    }
-
-    public void setCancelButton(Button cancelButton) {
-        this.cancelButton = cancelButton;
-    }
-
-    private RootViewController rootViewController;
-
     private Main main;
 
-    public Main getMain() {
-        return main;
-    }
+    private Person selectedPerson;
 
     public void setMain(Main main) {
         this.main = main;
     }
 
-
+    public void setSelectedPerson(Person selectedPerson) {
+        this.selectedPerson = selectedPerson;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void initializeForm() {
+        if(selectedPerson!=null) {
+            nameLabel.setText(selectedPerson.getName());
+            lastNameLabel.setText(selectedPerson.getLastname());
+            addressLabel.setText(selectedPerson.getAddress());
+            cityLabel.setText(selectedPerson.getCity());
+            postalCodeLabel.setText(selectedPerson.getPostalCode());
+            telephoneLabel.setText(selectedPerson.getTelephone());
+        }
+    }
+
+
+    public void setSaveButton(MouseEvent mouseEvent) {
+        Person person = new Person(nameLabel.getText(), lastNameLabel.getText(), addressLabel.getText(),
+                                    postalCodeLabel.getText(), telephoneLabel.getText(), cityLabel.getText());
+
+        main.getPersonList().set(main.getPersonList().indexOf(selectedPerson),person);
+        Stage stage = (Stage) saveButton.getScene().getWindow();
+        stage.close();
+    }
+
+
+    public void setCancelButton(MouseEvent mouseEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 
 }
