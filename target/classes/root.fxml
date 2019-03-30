@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:controller="pl.sda.addressbook.controller.RootViewController" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.sda.addressbook.controller.RootViewController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -21,7 +21,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView onMouseClicked="#selectedPerson" fx:id="personTableView" layoutX="34.0" layoutY="14.0" prefHeight="398.0" prefWidth="194.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="personTableView" layoutX="34.0" layoutY="14.0" onMouseClicked="#selectedPerson" prefHeight="398.0" prefWidth="194.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn fx:id="nameCol" prefWidth="123.0" text="Name" />
                             <TableColumn fx:id="lastNameCol" minWidth="0.0" prefWidth="139.0" text="Lastname" />
@@ -109,10 +109,11 @@
                         </GridPane>
                         <ButtonBar layoutY="301.0" prefHeight="98.0" prefWidth="380.0">
                           <buttons>
-                            <Button fx:id="newPersonButton" onAction="#setNewPersonButton" alignment="CENTER" mnemonicParsing="false" text="New Person" />
-                              <Button fx:id="editButton" onAction="#setEditButton" alignment="CENTER" mnemonicParsing="false" text="Edit" />
-                              <Button fx:id="deleteButton" onAction="#setDeleteButton" alignment="CENTER" mnemonicParsing="false" text="Delete" />
-                              <Button fx:id="saveButton" onMouseClicked="#setSaveButton" alignment="CENTER" mnemonicParsing="false" text="Save" />
+                            <Button fx:id="newPersonButton" alignment="CENTER" mnemonicParsing="false" onAction="#setNewPersonButton" text="New Person" />
+                              <Button fx:id="editButton" alignment="CENTER" mnemonicParsing="false" onAction="#setEditButton" text="Edit" />
+                              <Button fx:id="deleteButton" alignment="CENTER" mnemonicParsing="false" onAction="#setDeleteButton" text="Delete" />
+                              <Button fx:id="saveButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#setSaveButton" text="Save" />
+                              <Button fx:id="loadButton" mnemonicParsing="false" onAction="#setLoadButton" text="Load" />
                           </buttons>
                         </ButtonBar>
                      </children>

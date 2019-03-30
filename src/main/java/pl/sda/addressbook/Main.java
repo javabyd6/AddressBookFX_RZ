@@ -23,6 +23,10 @@ public class Main extends Application {
     private String jsonFileName = "database.json";
     private ObservableList<Person> personList = FXCollections.observableArrayList();
 
+    public void setPersonList(ObservableList<Person> personList) {
+        this.personList = personList;
+    }
+
     public Main() {
 
         personList.add(new Person("Jan", "Kowalski", "adres",

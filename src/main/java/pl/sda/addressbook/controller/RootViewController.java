@@ -2,6 +2,7 @@ package pl.sda.addressbook.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +20,9 @@ import pl.sda.addressbook.model.Person;
 import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -74,7 +78,12 @@ public class RootViewController implements Initializable {
     @FXML
     private Button saveButton;
 
+    @FXML
+    private Button loadButton;
+
     private Main main;
+
+    private Path file = Paths.get("C:\\Users\\remik\\OneDrive\\Pulpit\\Kurs Java\\AddressBookFX_RZ\\src\\file.csv");
 
     public Main getMain() {
         return main;
@@ -90,7 +99,6 @@ public class RootViewController implements Initializable {
     }
 
     public void loadPerson() {
-        System.out.println(getMain().getPersonList());
         personTableView.setItems(getMain().getPersonList());
         nameCol.setCellValueFactory(c -> c.getValue().nameProperty());
         lastNameCol.setCellValueFactory(c -> c.getValue().lastnameProperty());
@@ -152,5 +160,27 @@ public class RootViewController implements Initializable {
 
     public void setSaveButton(MouseEvent mouseEvent) throws IOException {
         Person.toJSON(main.getJsonFileName(), main.getPersonList());
+    }
+
+    public void setLoadButton() throws IOException {
+
+            byte[] data = Files.readAllBytes(file);
+            String convertData = new String(data);
+
+            String[] dataArray = convertData.split("\\r");
+
+            main.getPersonList().clear();
+
+            int i = 0;
+
+            for (String line : dataArray) {
+                String[] l = line.split(",");
+
+                Person person = new Person(
+                        l[0], l[1], l[2], l[3], l[4], l[5]
+                );
+                main.getPersonList().add(person);
+                i++;
+            }
     }
 }
