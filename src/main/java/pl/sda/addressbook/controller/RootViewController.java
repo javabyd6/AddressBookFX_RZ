@@ -162,6 +162,7 @@ public class RootViewController implements Initializable {
         Person.toJSON(main.getJsonFileName(), main.getPersonList());
     }
 
+
     public void setLoadButton() throws IOException {
 
             byte[] data = Files.readAllBytes(file);
